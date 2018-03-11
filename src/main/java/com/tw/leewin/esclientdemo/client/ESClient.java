@@ -9,26 +9,26 @@ import java.io.IOException;
 
 @Data
 public class ESClient {
-    private static ESClient ourInstance = new ESClient();
+  private static ESClient ourInstance = new ESClient();
 
-    public static ESClient getInstance() {
-        return ourInstance;
+  public static ESClient getInstance() {
+    return ourInstance;
+  }
+
+  private RestHighLevelClient client;
+
+  private ESClient() {
+    client = new RestHighLevelClient(RestClient.builder(
+        new HttpHost("localhost", 9200, "http"),
+        new HttpHost("localhost", 9201, "http")
+    ));
+  }
+
+  public void closeClient() {
+    try {
+      client.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    private RestHighLevelClient client;
-
-    private ESClient() {
-        client = new RestHighLevelClient(RestClient.builder(
-                new HttpHost("localhost", 9200, "http"),
-                new HttpHost("localhost", 9201, "http")
-        ));
-    }
-
-    public void closeClient() {
-        try {
-            client.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  }
 }
