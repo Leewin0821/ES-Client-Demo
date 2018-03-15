@@ -5,9 +5,15 @@ import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Component;
 
+@Component
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan(basePackageClasses = EsClientSpringFactory.class)
+@PropertySource(value = {"classpath:elasticSearch.properties"})
 public class EsConfig {
 
   @Value("${httpHost.host}")

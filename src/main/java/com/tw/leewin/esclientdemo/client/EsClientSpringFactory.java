@@ -1,28 +1,28 @@
 package com.tw.leewin.esclientdemo.client;
 
+import lombok.NoArgsConstructor;
 import org.apache.http.HttpHost;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
+@NoArgsConstructor
 public class EsClientSpringFactory {
-  private static HttpHost HTTP_HOST;
-  private static int CONNECT_TIMEOUT_MILLIS = 1000;
-  private static int SOCKET_TIMEOUT_MILLIS = 30000;
-  private static int CONNECTION_REQUEST_TIMEOUT_MILLIS = 500;
-  private static int MAX_CONNECT_TOTAL = 30;
-  private static int MAX_CONNECT_PER_ROUTE = 10;
+  public static int CONNECT_TIMEOUT_MILLIS = 1000;
+  public static int SOCKET_TIMEOUT_MILLIS = 30000;
+  public static int CONNECTION_REQUEST_TIMEOUT_MILLIS = 500;
+  public static int MAX_CONNECT_TOTAL = 30;
+  public static int MAX_CONNECT_PER_ROUTE = 10;
+
   private static EsClientSpringFactory esClientSpringFactory = new EsClientSpringFactory();
+  private static HttpHost HTTP_HOST;
   private RestClientBuilder builder;
   private RestClient restClient;
   private RestHighLevelClient restHighLevelClient;
-
-  private EsClientSpringFactory() {
-  }
 
   public static EsClientSpringFactory build(HttpHost httpHost, Integer maxConnectNum, Integer maxConnectPerRoute) {
     HTTP_HOST = httpHost;

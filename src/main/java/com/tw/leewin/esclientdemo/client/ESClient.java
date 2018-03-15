@@ -4,10 +4,12 @@ import lombok.Data;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Data
+@Component
 public class ESClient {
   private static ESClient ourInstance = new ESClient();
 
